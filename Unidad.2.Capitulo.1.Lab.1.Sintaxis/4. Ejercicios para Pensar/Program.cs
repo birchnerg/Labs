@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,15 +40,20 @@ namespace _4.Ejercicios_para_Pensar
                         break;
                     case (ConsoleKey.D6): case (ConsoleKey.NumPad6):
                         Console.WriteLine("-->ejecuta modulo 6");
+                        entero_a_romano();
+
                         break;
                     case (ConsoleKey.D7): case (ConsoleKey.NumPad7):
                         Console.WriteLine("-->ejecuta modulo 7");
+                        primos_gemelos();
                         break;
                     case (ConsoleKey.D8): case(ConsoleKey.NumPad8):
                         Console.WriteLine("-->ejecuta modulo 8");
+                        validar_clave();
                         break;
                     case (ConsoleKey.D9): case (ConsoleKey.NumPad9):
                         Console.WriteLine("-->ejecuta modulo 9");
+                        piramide_asteriscos();
                         break;
                     case (ConsoleKey.D0):
                     case (ConsoleKey.NumPad0):
@@ -68,10 +73,10 @@ namespace _4.Ejercicios_para_Pensar
             Console.WriteLine("3: serie de Fibonacci");
             Console.WriteLine("4: numeros pares del 1 al 100");
             Console.WriteLine("5: ingrese un nombre de mes para conocer su numero en el calendario");
-            Console.WriteLine("6: ");
-            Console.WriteLine("7: ");
-            Console.WriteLine("8: ");
-            Console.WriteLine("9: ");
+            Console.WriteLine("6: transformar numero decimal a romano");
+            Console.WriteLine("7: numeros primos gemelos (NO REALIZADO)");
+            Console.WriteLine("8: validacion de clave");
+            Console.WriteLine("9: piramide de asteriscos");
             Console.WriteLine("0: Salir");
             ConsoleKeyInfo opcion = Console.ReadKey();
             return opcion;
@@ -194,8 +199,7 @@ namespace _4.Ejercicios_para_Pensar
             {
                 Console.WriteLine("Ingrese el nombre de un mes para concer su numero en el calendario: ");
                 string mes = Console.ReadLine();
-                mes.ToLower();
-                switch (mes)
+                switch (mes.ToLower())
                 {
                     case ("enero"):
                         Console.WriteLine("{0} + 1", mes);
@@ -254,31 +258,175 @@ namespace _4.Ejercicios_para_Pensar
             Console.WriteLine("Presione una tecla para volver al menu");
             Console.ReadKey();
         }
-        public static void nombre6()
+        public static void entero_a_romano()
         {
             Console.WriteLine("----------------");
-
+            string mensaje = "Ingrese un numero entero menor a 3999 para transformarlo a notacion romana:";
+            int numero = leer_entero(mensaje);
+            string romano = "";
+            int unidad_mil = (numero / 1000); 
+            if (unidad_mil != 0)
+            {
+                for (int i = 0; i < unidad_mil; i++)
+                {
+                    romano = romano + "M";
+                }
+                numero = numero - 1000 * unidad_mil;
+            }
+            int centena = numero / 100;
+            if (centena != 0)
+            {
+                switch (centena)
+                {
+                    case (1):
+                        romano = romano + "C";
+                        break;
+                    case (2):
+                        romano = romano + "CC";
+                        break;
+                    case (3):
+                        romano = romano + "CCC";
+                        break;
+                    case (4):
+                        romano = romano + "CD";
+                        break;
+                    case (5):
+                        romano = romano + "D";
+                        break;
+                    case (6):
+                        romano = romano + "DC";
+                        break;
+                    case (7):
+                        romano = romano + "DCC";
+                        break;
+                    case (8):
+                        romano = romano + "DCCC";
+                        break;
+                    case (9):
+                        romano = romano + "CM";
+                        break;
+                }
+                numero = numero - 100 * centena; 
+            }
+            int decena = numero / 10;
+            if (decena != 0)
+            {
+                switch (decena)
+                {
+                    case (1):
+                        romano = romano + "X";
+                        break;
+                    case (2):
+                        romano = romano + "XX";
+                        break;
+                    case (3):
+                        romano = romano + "XXX";
+                        break;
+                    case (4):
+                        romano = romano + "XL";
+                        break;
+                    case (5):
+                        romano = romano + "L";
+                        break;
+                    case (6):
+                        romano = romano + "LX";
+                        break;
+                    case (7):
+                        romano = romano + "LXX";
+                        break;
+                    case (8):
+                        romano = romano + "LXXX";
+                        break;
+                    case (9):
+                        romano = romano + "XC";
+                        break;
+                }
+                numero = numero - 10 * decena;
+            }
+            if (numero != 0)
+            {
+                switch (numero)
+                {
+                    case (1):
+                        romano = romano + "I";
+                        break;
+                    case (2):
+                        romano = romano + "II";
+                        break;
+                    case (3):
+                        romano = romano + "III";
+                        break;
+                    case (4):
+                        romano = romano + "IV";
+                        break;
+                    case (5):
+                        romano = romano + "V";
+                        break;
+                    case (6):
+                        romano = romano + "VI";
+                        break;
+                    case (7):
+                        romano = romano + "VII";
+                        break;
+                    case (8):
+                        romano = romano + "VIII";
+                        break;
+                    case (9):
+                        romano = romano + "IX";
+                        break;
+                }
+            }
+            Console.WriteLine("");
+            Console.WriteLine(romano);
             Console.WriteLine("Presione una tecla para volver al menu");
             Console.ReadKey();
         }
-        public static void nombre7()
+        public static void primos_gemelos()
         {
             Console.WriteLine("----------------");
-
+            Console.WriteLine(" NO REALIZADO" +
+                "");           
             Console.WriteLine("Presione una tecla para volver al menu");
             Console.ReadKey();
         }
-        public static void nombre8()
+        public static void validar_clave()
         {
             Console.WriteLine("----------------");
-
+            int intentos = 0;
+            Boolean estado = false;
+            string clave_correcta = "nEt2021";
+            do
+            {
+                intentos = intentos + 1;
+                Console.WriteLine("Introduzca la clave (intento {0} de 4)    ----  \"nEt2021\"", intentos);
+                string clave_ingresada = Console.ReadLine();
+                if (clave_correcta == clave_ingresada)
+                {
+                    estado = true;
+                }
+            } while ((intentos < 4) && (estado == false)) ;
+            if (estado == true)
+            {
+                Console.WriteLine("Clave correcta");
+            }
+            else
+            {
+                Console.WriteLine("Clave incorrecta en los {0} intentos posibles", intentos);
+            }
             Console.WriteLine("Presione una tecla para volver al menu");
             Console.ReadKey();
         }
-        public static void nombre9()
+        public static void piramide_asteriscos()
         {
             Console.WriteLine("----------------");
-
+            string mensaje = "Ingrese cantidad de pisos de la piramide";
+            int cantidad = leer_entero(mensaje);
+            string piramide = "*";
+            for (int i = 0; i < cantidad; i++)
+            {
+                Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (piramide.Length / 2)) + "}", piramide));
+                piramide = piramide + "**";
+            }
             Console.WriteLine("Presione una tecla para volver al menu");
             Console.ReadKey();
         }
@@ -303,5 +451,6 @@ namespace _4.Ejercicios_para_Pensar
             } while (bandera != true);
             return entero;
         }
+       
     }
 }
